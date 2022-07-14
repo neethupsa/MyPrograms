@@ -45,7 +45,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	//Iterate all the exit points and build graph with all the nodes that has path to atleast one exit.
 	//After this loop, graph is created with nodes having shortest distance to exit.
-	for (auto coordinate : mazeCanvas.getExitCoordinates())
+	for (auto const& coordinate : mazeCanvas.getExitCoordinates())
 	{
 		mazeCanvas.buildGraph(coordinate, 0);
 	}

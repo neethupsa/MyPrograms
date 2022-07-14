@@ -10,6 +10,8 @@ public:
 	int m_nXPoint;
 	int m_nYPoint;
 
+	Coordinates() = default;
+
 	//Constructor
 	Coordinates(int nXPoint = 0, int nYPoint = 0);
 

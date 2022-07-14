@@ -24,8 +24,8 @@ public:
 	bool readAndParseMazeFile(const string& strMazeFilePath);
 	bool initializeView();
 	bool getSourceCoordinate(Coordinates& sourceCordinates);
-	bool isExit();
-	vector<Coordinates> getExitCoordinates();
+	bool isExit()const;
+	vector<Coordinates> getExitCoordinates() const;
 	MazeNode* buildGraph(Coordinates nodeCoordinates, int nDistance);
 	int findSmallestDistanceAmongNieghbours(MazeNode* pMazeNode);
 	void findNearestExit(Coordinates srcCordinate, std::vector<Coordinates>& pathToExit);

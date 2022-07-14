@@ -1,12 +1,12 @@
 #include "MazeView.h"
 #include <fstream>
 
-const int WALL_COLOR = 72;
-const int PATH_COLOR = 2;
-const int EXIT_CODE = 27; //Escape key
-const char WALL = '#';
-const char FREE = ' ';
-const char PATH = '*';
+constexpr int WALL_COLOR = 72;
+constexpr int PATH_COLOR = 2;
+constexpr int EXIT_CODE = 27; //Escape key
+constexpr char WALL = '#';
+constexpr char FREE = ' ';
+constexpr char PATH = '*';
 
 /**
  * @brief Constructor
@@ -15,19 +15,18 @@ const char PATH = '*';
  *  
  */
 MazeView::MazeView() :
-			m_outHandle(NULL),
-			m_inHandle(NULL),
-			m_events(0),
-			m_ExitKey(0),
-			m_mouseXPoint(0),
-			m_mouseYPoint(0),
-			m_buttonState(0),
-			m_nRowCount(0),
-			m_nColCount(0),
-			m_MazeArray(NULL)
+			m_outHandle{ NULL },
+			m_inHandle{ NULL },
+			m_events{ 0 },
+			m_ExitKey{ 0 },
+			m_mouseXPoint{ 0 },
+			m_mouseYPoint{ 0 },
+			m_buttonState{ 0 },
+			m_nRowCount{ 0 },
+			m_nColCount{ 0 },
+			m_MazeArray{ NULL }
 {
-	m_ExitCoordinates.clear();
-	m_mazeNodeMap.clear();
+	
 }
 
 /**
@@ -256,10 +255,10 @@ bool MazeView::getSourceCoordinate(Coordinates& sourceCordinates)
 		//four(left, right, up, down) nodes of that point,which has shortest distance to nearest exit.
 		if (m_MazeArray[sourceCordinates.m_nXPoint][sourceCordinates.m_nYPoint] == WALL)
 		{
-			string LeftKey(std::to_string(sourceCordinates.m_nXPoint) + "," + std::to_string(sourceCordinates.m_nYPoint - 1));
-			string RightKey(std::to_string(sourceCordinates.m_nXPoint) + "," + std::to_string(sourceCordinates.m_nYPoint + 1));
-			string UpKey(std::to_string(sourceCordinates.m_nXPoint - 1) + "," + std::to_string(sourceCordinates.m_nYPoint));
-			string DownKey(std::to_string(sourceCordinates.m_nXPoint + 1) + "," + std::to_string(sourceCordinates.m_nYPoint));
+			const string LeftKey(std::to_string(sourceCordinates.m_nXPoint) + "," + std::to_string(sourceCordinates.m_nYPoint - 1));
+			const string RightKey(std::to_string(sourceCordinates.m_nXPoint) + "," + std::to_string(sourceCordinates.m_nYPoint + 1));
+			const string UpKey(std::to_string(sourceCordinates.m_nXPoint - 1) + "," + std::to_string(sourceCordinates.m_nYPoint));
+			const string DownKey(std::to_string(sourceCordinates.m_nXPoint + 1) + "," + std::to_string(sourceCordinates.m_nYPoint));
 
 			int nShortestDistanceAmongNieghbours = -1;
 			MazeNode* pMazeNodeWithShortDistance = NULL;
@@ -330,7 +329,7 @@ bool MazeView::getSourceCoordinate(Coordinates& sourceCordinates)
  *
  * @return bool - true if escape key is pressed, otherwise return false.
  */
-bool MazeView::isExit()
+bool MazeView::isExit() const
 {
 	if (m_ExitKey == EXIT_CODE)
 	{
@@ -348,7 +347,7 @@ bool MazeView::isExit()
  *
  * @return vector<Coordinates> - Copy of Exit Coordinates vector.
  */
-vector<Coordinates> MazeView::getExitCoordinates()
+vector<Coordinates> MazeView::getExitCoordinates() const
 {
 	return m_ExitCoordinates;
 }
@@ -390,7 +389,7 @@ MazeNode* MazeView::buildGraph(Coordinates nodeCoordinates, int nDistance)
 		return NULL;
 	}
 
-	string MapKey(std::to_string(nodeCoordinates.m_nXPoint) + "," + std::to_string(nodeCoordinates.m_nYPoint));
+	const string MapKey(std::to_string(nodeCoordinates.m_nXPoint) + "," + std::to_string(nodeCoordinates.m_nYPoint));
 	auto mapIterator = m_mazeNodeMap.find(MapKey);
 	MazeNode* NewMazeNode = NULL;
 	if (mapIterator != m_mazeNodeMap.end())
